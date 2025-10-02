@@ -1,0 +1,14 @@
+{
+  "collectionName": "components_shared_topics",
+  "info": {
+    "displayName": "Topic"
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true
+    }
+  },
+  "config": {}
+}
