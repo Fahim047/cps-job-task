@@ -4,6 +4,7 @@ import Hero from "@/components/landing/hero";
 import Instructors from "@/components/landing/instructors";
 import KeyFeatures from "@/components/landing/key-features";
 import SuccessStats from "@/components/landing/success-stats";
+import Footer from "@/components/layout/footer";
 import Header from "@/components/layout/header";
 
 export default function Home() {
@@ -18,6 +19,7 @@ export default function Home() {
         <Instructors />
         <FAQ />
       </main>
+      <Footer />
     </div>
   );
 }
