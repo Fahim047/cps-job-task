@@ -1,3 +1,4 @@
+import CourseSyllabus from "@/components/landing/course-syllabus";
 import Hero from "@/components/landing/hero";
 import KeyFeatures from "@/components/landing/key-features";
 import SuccessStats from "@/components/landing/success-stats";
@@ -11,6 +12,7 @@ export default function Home() {
         <Hero />
         <SuccessStats />
         <KeyFeatures />
+        <CourseSyllabus />
       </main>
     </div>
   );
