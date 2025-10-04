@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useTransition } from "react";
 import Link from "next/link";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -24,25 +24,34 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { SignInFormValues, signInSchema } from "@/lib/zod-schemas";
+import { signInUserAction } from "@/actions/auth-actions";
+import { toast } from "sonner";
+import { useRouter } from "next/navigation";
 
 export default function SignInPage() {
+  const router = useRouter();
+  const [isPending, startTransition] = useTransition();
   const [showPassword, setShowPassword] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
 
   const form = useForm<SignInFormValues>({
     resolver: zodResolver(signInSchema),
     defaultValues: {
-      email: "",
+      identifier: "",
       password: "",
     },
   });
 
-  async function onSubmit(data: SignInFormValues) {
-    setIsLoading(true);
-    // Simulate API call
-    await new Promise((resolve) => setTimeout(resolve, 2000));
-    console.log("Sign in data:", data);
-    setIsLoading(false);
+  function onSubmit(data: SignInFormValues) {
+    startTransition(async () => {
+      const result = await signInUserAction(data);
+      if (result.success) {
+        toast.success(result.message);
+        form.reset();
+        router.push("/dashboard");
+      } else {
+        toast.error(result.message);
+      }
+    });
   }
 
   return (
@@ -72,14 +81,14 @@ export default function SignInPage() {
               >
                 <FormField
                   control={form.control}
-                  name="email"
+                  name="identifier"
                   render={({ field }) => (
                     <FormItem>
                       <FormLabel>Email</FormLabel>
                       <FormControl>
                         <Input
-                          placeholder="you@example.com"
-                          type="email"
+                          placeholder="username/email"
+                          type="text"
                           {...field}
                         />
                       </FormControl>
@@ -127,8 +136,8 @@ export default function SignInPage() {
                     Forgot password?
                   </Link>
                 </div>
-                <Button type="submit" className="w-full" disabled={isLoading}>
-                  {isLoading ? "Signing in..." : "Sign In"}
+                <Button type="submit" className="w-full" disabled={isPending}>
+                  {isPending ? "Signing in..." : "Sign In"}
                 </Button>
               </form>
             </Form>

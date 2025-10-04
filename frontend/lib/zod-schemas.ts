@@ -30,7 +30,9 @@ export const signUpSchema = z
   });
 
 export const signInSchema = z.object({
-  email: z.email({ error: "Please enter a valid email address" }),
+  identifier: z.string({
+    error: "Please enter a valid email address/username",
+  }),
   password: z
     .string()
     .min(8, { error: "Password must be at least 8 characters" }),

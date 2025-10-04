@@ -27,8 +27,10 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { SignUpFormValues, signUpSchema } from "@/lib/zod-schemas";
 import { registerUserAction } from "@/actions/auth-actions";
 import { toast } from "sonner";
+import { useRouter } from "next/navigation";
 
 export default function SignUpPage() {
+  const router = useRouter();
   const [isPending, startTransition] = useTransition();
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
@@ -51,6 +53,7 @@ export default function SignUpPage() {
       if (result.success) {
         toast.success(result.message);
         form.reset();
+        router.push("/dashboard");
       } else {
         toast.error(result.message);
       }
