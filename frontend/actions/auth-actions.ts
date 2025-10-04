@@ -3,6 +3,7 @@
 import { createStrapiURL } from "@/lib/utils";
 import { SignInFormValues, SignUpFormValues } from "@/lib/zod-schemas";
 import { cookies } from "next/headers";
+import { redirect } from "next/navigation";
 
 const config = {
   path: "/",
@@ -81,4 +82,9 @@ export async function signInUserAction(formValues: SignInFormValues) {
       message: "Unexpected error",
     };
   }
+}
+export async function signOutUserAction() {
+  const cookieStore = await cookies();
+  cookieStore.set("token", "", { ...config, maxAge: 0 });
+  redirect("/");
 }
