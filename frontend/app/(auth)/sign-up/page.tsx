@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useTransition } from "react";
 import Link from "next/link";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -25,29 +25,36 @@ import {
 } from "@/components/ui/form";
 import { Checkbox } from "@/components/ui/checkbox";
 import { SignUpFormValues, signUpSchema } from "@/lib/zod-schemas";
+import { registerUserAction } from "@/actions/auth-actions";
+import { toast } from "sonner";
 
 export default function SignUpPage() {
+  const [isPending, startTransition] = useTransition();
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
 
   const form = useForm<SignUpFormValues>({
     resolver: zodResolver(signUpSchema),
     defaultValues: {
       fullName: "",
       email: "",
+      username: "",
       password: "",
       confirmPassword: "",
       agreeToTerms: false,
     },
   });
 
-  async function onSubmit(data: SignUpFormValues) {
-    setIsLoading(true);
-    // Simulate API call
-    await new Promise((resolve) => setTimeout(resolve, 2000));
-    console.log("Sign up data:", data);
-    setIsLoading(false);
+  function onSubmit(data: SignUpFormValues) {
+    startTransition(async () => {
+      const result = await registerUserAction(data);
+      if (result.success) {
+        toast.success(result.message);
+        form.reset();
+      } else {
+        toast.error(result.message);
+      }
+    });
   }
 
   return (
@@ -85,6 +92,19 @@ export default function SignUpPage() {
                       <FormLabel>Full Name</FormLabel>
                       <FormControl>
                         <Input placeholder="John Doe" {...field} />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                <FormField
+                  control={form.control}
+                  name="username"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Username</FormLabel>
+                      <FormControl>
+                        <Input placeholder="username" type="text" {...field} />
                       </FormControl>
                       <FormMessage />
                     </FormItem>
@@ -206,8 +226,8 @@ export default function SignUpPage() {
                     </FormItem>
                   )}
                 />
-                <Button type="submit" className="w-full" disabled={isLoading}>
-                  {isLoading ? "Creating account..." : "Create Account"}
+                <Button type="submit" className="w-full" disabled={isPending}>
+                  {isPending ? "Creating account..." : "Create Account"}
                 </Button>
               </form>
             </Form>
