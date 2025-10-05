@@ -23,15 +23,13 @@ import { useRouter } from "next/navigation";
 import Image from "next/image";
 import { signOutUserAction } from "@/actions/auth-actions";
 
-const HeaderLinks = [
-  "Features",
-  "Curriculum",
-  "Team",
-  "Reviews",
-  "FAQ",
-] as const;
-
-export default function Header({ user }: { user: any }) {
+export default function Header({
+  user,
+  globalData,
+}: {
+  user: any;
+  globalData: any;
+}) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const router = useRouter();
   const handleLogout = async () => {
@@ -47,18 +45,18 @@ export default function Header({ user }: { user: any }) {
             <div className="size-8 bg-primary rounded-lg flex items-center justify-center">
               <Code className="size-5 text-primary-foreground" />
             </div>
-            <span className="text-xl font-bold">CPS Academy</span>
+            <span className="text-xl font-bold">{globalData?.websiteName}</span>
           </Link>
 
           {/* === Desktop Nav === */}
           <nav className="hidden lg:flex items-center gap-8">
-            {HeaderLinks.map((item) => (
+            {globalData?.navLinks.map((item: any) => (
               <Link
-                key={item}
-                href={`#${item.toLowerCase()}`}
+                key={item.id}
+                href={item.href}
                 className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors"
               >
-                {item}
+                {item.label}
               </Link>
             ))}
           </nav>
@@ -137,14 +135,14 @@ export default function Header({ user }: { user: any }) {
 
               {/* Mobile Nav */}
               <nav className="flex flex-col gap-4 mt-8 px-4">
-                {HeaderLinks.map((item) => (
+                {globalData?.navLinks?.map((item: any) => (
                   <Link
-                    key={item}
-                    href={`#${item.toLowerCase()}`}
+                    key={item.id}
+                    href={item.href}
                     className="text-md hover:text-primary transition-colors"
                     onClick={() => setMobileMenuOpen(false)}
                   >
-                    {item}
+                    {item.label}
                   </Link>
                 ))}
               </nav>

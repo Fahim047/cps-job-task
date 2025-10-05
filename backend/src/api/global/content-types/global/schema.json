@@ -18,6 +18,15 @@
     },
     "description": {
       "type": "string"
+    },
+    "websiteName": {
+      "type": "string",
+      "required": true
+    },
+    "navLinks": {
+      "type": "component",
+      "component": "shared.link",
+      "repeatable": true
     }
   }
 }

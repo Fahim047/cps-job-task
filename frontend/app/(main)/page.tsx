@@ -5,8 +5,11 @@ import Instructors from "@/components/landing/instructors";
 import KeyFeatures from "@/components/landing/key-features";
 import SuccessStats from "@/components/landing/success-stats";
 import Testimonials from "@/components/landing/testimonials";
+import { landingQuery } from "@/data/strapi-query/query";
+import { fetchStrapiData } from "@/lib/utils";
 
-export default function Home() {
+export default async function Home() {
+  const globalData = await fetchStrapiData("api/landing-page", landingQuery);
   return (
     <main>
       <Hero />
@@ -15,7 +18,7 @@ export default function Home() {
       <CourseSyllabus />
       <Instructors />
       <Testimonials />
-      <FAQ />
+      <FAQ faqs={globalData.faqs} />
     </main>
   );
 }
