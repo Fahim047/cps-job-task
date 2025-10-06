@@ -23,11 +23,6 @@
       "type": "integer",
       "required": true
     },
-    "topics": {
-      "type": "component",
-      "component": "shared.topic",
-      "repeatable": true
-    },
     "videoUrl": {
       "type": "string"
     }

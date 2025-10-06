@@ -451,7 +451,6 @@ export interface ApiClassClass extends Struct.CollectionTypeSchema {
     order: Schema.Attribute.Integer & Schema.Attribute.Required;
     publishedAt: Schema.Attribute.DateTime;
     title: Schema.Attribute.String & Schema.Attribute.Required;
-    topics: Schema.Attribute.Component<'shared.topic', true>;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -473,8 +472,8 @@ export interface ApiCourseCourse extends Struct.CollectionTypeSchema {
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
-    description: Schema.Attribute.Blocks & Schema.Attribute.Required;
-    intructors: Schema.Attribute.Relation<
+    description: Schema.Attribute.Blocks;
+    instructors: Schema.Attribute.Relation<
       'oneToMany',
       'api::intructor.intructor'
     >;
@@ -486,6 +485,7 @@ export interface ApiCourseCourse extends Struct.CollectionTypeSchema {
       Schema.Attribute.Private;
     modules: Schema.Attribute.Relation<'oneToMany', 'api::module.module'>;
     publishedAt: Schema.Attribute.DateTime;
+    short_description: Schema.Attribute.Text;
     slug: Schema.Attribute.UID<'title'> & Schema.Attribute.Required;
     title: Schema.Attribute.String & Schema.Attribute.Required;
     updatedAt: Schema.Attribute.DateTime;
@@ -530,7 +530,7 @@ export interface ApiGlobalGlobal extends Struct.SingleTypeSchema {
 export interface ApiIntructorIntructor extends Struct.CollectionTypeSchema {
   collectionName: 'intructors';
   info: {
-    displayName: 'Intructor';
+    displayName: 'Instructor';
     pluralName: 'intructors';
     singularName: 'intructor';
   };
@@ -613,6 +613,7 @@ export interface ApiModuleModule extends Struct.CollectionTypeSchema {
     order: Schema.Attribute.Integer & Schema.Attribute.Required;
     publishedAt: Schema.Attribute.DateTime;
     title: Schema.Attribute.String & Schema.Attribute.Required;
+    topics: Schema.Attribute.Component<'shared.topic', true>;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;

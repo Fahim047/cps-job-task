@@ -20,19 +20,22 @@
       "targetField": "title",
       "required": true
     },
+    "short_description": {
+      "type": "text"
+    },
     "description": {
       "type": "blocks",
-      "required": true
+      "required": false
+    },
+    "instructors": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::intructor.intructor"
     },
     "modules": {
       "type": "relation",
       "relation": "oneToMany",
       "target": "api::module.module"
-    },
-    "intructors": {
-      "type": "relation",
-      "relation": "oneToMany",
-      "target": "api::intructor.intructor"
     }
   }
 }

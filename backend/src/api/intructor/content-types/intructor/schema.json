@@ -4,7 +4,7 @@
   "info": {
     "singularName": "intructor",
     "pluralName": "intructors",
-    "displayName": "Intructor"
+    "displayName": "Instructor"
   },
   "options": {
     "draftAndPublish": true

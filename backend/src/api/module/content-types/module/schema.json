@@ -23,6 +23,11 @@
       "type": "integer",
       "required": true
     },
+    "topics": {
+      "type": "component",
+      "component": "shared.topic",
+      "repeatable": true
+    },
     "classes": {
       "type": "relation",
       "relation": "oneToMany",
