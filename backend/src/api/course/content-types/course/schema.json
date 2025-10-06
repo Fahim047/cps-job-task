@@ -28,6 +28,11 @@
       "type": "relation",
       "relation": "oneToMany",
       "target": "api::module.module"
+    },
+    "intructors": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::intructor.intructor"
     }
   }
 }

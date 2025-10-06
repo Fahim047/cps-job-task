@@ -20,6 +20,11 @@
       "type": "component",
       "component": "shared.faq",
       "repeatable": true
+    },
+    "stat_section": {
+      "type": "component",
+      "component": "landing.stat",
+      "repeatable": true
     }
   }
 }

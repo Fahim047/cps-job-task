@@ -1,0 +1,32 @@
+{
+  "kind": "collectionType",
+  "collectionName": "intructors",
+  "info": {
+    "singularName": "intructor",
+    "pluralName": "intructors",
+    "displayName": "Intructor"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "name": {
+      "type": "string",
+      "required": true
+    },
+    "jobTitle": {
+      "type": "string",
+      "required": true
+    },
+    "bio": {
+      "type": "text",
+      "required": true
+    },
+    "social": {
+      "type": "component",
+      "component": "shared.link",
+      "repeatable": true
+    }
+  }
+}

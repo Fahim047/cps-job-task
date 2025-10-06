@@ -1,0 +1,19 @@
+{
+  "collectionName": "components_landing_stats",
+  "info": {
+    "displayName": "Stat"
+  },
+  "options": {},
+  "attributes": {
+    "label": {
+      "type": "string",
+      "required": true
+    },
+    "value": {
+      "type": "integer",
+      "required": true,
+      "default": 0
+    }
+  },
+  "config": {}
+}

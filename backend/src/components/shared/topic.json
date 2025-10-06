@@ -8,6 +8,10 @@
     "title": {
       "type": "string",
       "required": true
+    },
+    "resourceUrl": {
+      "type": "string",
+      "required": false
     }
   },
   "config": {}

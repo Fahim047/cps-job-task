@@ -27,6 +27,9 @@
       "type": "component",
       "component": "shared.topic",
       "repeatable": true
+    },
+    "videoUrl": {
+      "type": "string"
     }
   }
 }
