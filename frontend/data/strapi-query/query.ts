@@ -16,17 +16,20 @@ export const landingQuery = {
 
 export const coursesQuery = {
   populate: {
+    thumbnail: {
+      fields: ["url", "alternativeText"],
+    },
     instructors: {
       fields: ["id", "name", "jobTitle", "bio"], // ✅ must exist
     },
     modules: {
-      fields: ["id", "title"], // ❌ removed description if it’s not a simple field
+      fields: ["id", "title"],
       populate: {
         classes: {
-          fields: ["id", "title"], // ❌ same here
+          fields: ["id", "title"],
         },
         topics: {
-          fields: ["id", "title"], // keep only real fields
+          fields: ["id", "title", "resourceUrl"],
         },
       },
     },

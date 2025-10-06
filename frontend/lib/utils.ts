@@ -48,3 +48,8 @@ export async function fetchStrapiData(path: string, query: object = {}) {
     return null;
   }
 }
+
+export function createStrapiImageUrl(path: string) {
+  const baseUrl = process.env.NEXT_PUBLIC_STRAPI_BASE_URL;
+  return baseUrl + path;
+}

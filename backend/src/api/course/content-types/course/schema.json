@@ -36,6 +36,13 @@
       "type": "relation",
       "relation": "oneToMany",
       "target": "api::module.module"
+    },
+    "thumbnail": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "images"
+      ]
     }
   }
 }

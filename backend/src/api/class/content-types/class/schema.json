@@ -16,12 +16,7 @@
       "required": true
     },
     "description": {
-      "type": "blocks",
-      "required": true
-    },
-    "order": {
-      "type": "integer",
-      "required": true
+      "type": "text"
     },
     "videoUrl": {
       "type": "string"

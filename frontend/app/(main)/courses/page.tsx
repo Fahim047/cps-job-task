@@ -44,7 +44,7 @@ export default async function PublicCoursesPage() {
         {courses.map((course: any) => (
           <PublicCourseCard
             key={course.id}
-            id={course.id}
+            id={course.documentId}
             title={course.title}
             shortDescription={course.short_description}
             thumbnailUrl={course.thumbnailUrl}
